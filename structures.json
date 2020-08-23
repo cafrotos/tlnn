@@ -1,0 +1,27 @@
+{
+  "resources": {
+    "id": "uuid",
+    "value": "string",
+    "tags": [
+      ""
+    ],
+    "media": {
+      "images": [
+        "url"
+      ],
+      "videos": [
+        "url"
+      ],
+      "audios": [
+        "url"
+      ]
+    }
+  },
+  "tags": [
+    {
+      "id": "uuid",
+      "tag": "string",
+      "descriptions": "text"
+    }
+  ]
+}
