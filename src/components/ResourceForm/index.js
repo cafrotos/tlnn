@@ -1,5 +1,5 @@
 import React, { forwardRef, useImperativeHandle } from 'react';
-import { Form, Input, Upload, TreeSelect } from 'antd';
+import { Form, Input, Upload, TreeSelect, Select } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import resourceStructures from 'configs/resourceStructures';
 
@@ -53,8 +53,8 @@ export default forwardRef(({
         />
       </Form.Item>
       <Form.Item
-        name="identify"
-        label="Identify"
+        name="identity"
+        label="Identity"
         rules={[{
           required: true
         }]}
@@ -115,7 +115,12 @@ export default forwardRef(({
           required: true
         }]}
       >
-        <Input />
+        <Select
+          mode="tags"
+          dropdownStyle={{
+            display: "none"
+          }}
+        />
       </Form.Item>
     </Form>
   )

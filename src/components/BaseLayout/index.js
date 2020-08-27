@@ -34,11 +34,11 @@ export default ({
           </Layout.Header>
         )
       }
-      <Layout.Content className="base_content">
+      <Layout.Content className={`base_content ${routeMatch.path.split("/").join("_")}`}>
         {children}
       </Layout.Content>
-      <Layout.Footer>
-
+      <Layout.Footer className="base_footer">
+        @2020-UET
       </Layout.Footer>
     </Layout>
   )

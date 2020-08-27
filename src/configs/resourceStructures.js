@@ -7,23 +7,23 @@ export default [
     children: [
       {
         title: "Living Room",
-        value: "Living Room",
-        key: "Living Room",
+        value: "Indoor/Living Room",
+        key: "Indoor/Living Room",
       },
       {
         title: "Kitten Room",
-        value: "Kitten Room",
-        key: "Kitten Room",
+        value: "Indoor/Kitten Room",
+        key: "Indoor/Kitten Room",
       },
       {
         title: "Bath Room",
-        value: "Bath Room",
-        key: "Bath Room",
+        value: "Indoor/Bath Room",
+        key: "Indoor/Bath Room",
       },
       {
         title: "Bed Room",
-        value: "Bed Room",
-        key: "Bed Room",
+        value: "Indoor/Bed Room",
+        key: "Indoor/Bed Room",
       }
     ]
   },
@@ -35,33 +35,33 @@ export default [
     children: [
       {
         title: "Poultry",
-        value: "Poultry",
-        key: "Poultry",
+        value: "Animals/Poultry",
+        key: "Animals/Poultry",
       },
       {
         title: "Cattle",
-        value: "Cattle",
-        key: "Cattle",
+        value: "Animals/Cattle",
+        key: "Animals/Cattle",
       },
       {
         title: "Seafood",
-        value: "Seafood",
-        key: "Seafood",
+        value: "Animals/Seafood",
+        key: "Animals/Seafood",
       },
       {
         title: "Pet",
-        value: "Pet",
-        key: "Pet",
+        value: "Animals/Pet",
+        key: "Animals/Pet",
       },
       {
         title: "Wild Animals",
-        value: "Wild Animals",
-        key: "Wild Animals",
+        value: "Animals/Wild Animals",
+        key: "Animals/Wild Animals",
       },
       {
         title: "Insect",
-        value: "Insect",
-        key: "Insect",
+        value: "Animals/Insect",
+        key: "Animals/Insect",
       },
     ]
   },
@@ -88,13 +88,13 @@ export default [
     children: [
       {
         title: "Flowers",
-        value: "Flowers",
-        key: "Flowers",
+        value: "Plants/Flowers",
+        key: "Plants/Flowers",
       },
       {
         title: "Trees",
-        value: "Trees",
-        key: "Trees",
+        value: "Plants/Trees",
+        key: "Plants/Trees",
       }
     ]
   },
@@ -131,13 +131,13 @@ export default [
     children: [
       {
         title: "Activities",
-        value: "Activities",
-        key: "Activities",
+        value: "Actions/Activities",
+        key: "Actions/Activities",
       },
       {
         title: "State",
-        value: "State",
-        key: "State",
+        value: "Actions/State",
+        key: "Actions/State",
       }
     ]
   },
