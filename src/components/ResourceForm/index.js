@@ -89,6 +89,7 @@ export default forwardRef(({
         }]}
       >
         <Upload.Dragger
+        
           listType="picture-card"
           accept={"image/*,audio/*,video/*"}
           name="multimedias"
