@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Row, Tree, Button, Divider, Space } from 'antd';
+import { Col, Row, Tree, Button, Divider, Space, Spin } from 'antd';
 import resourceStructures from 'configs/resourceStructures';
 import Title from 'components/Title';
 import { useHistory } from 'react-router-dom';
@@ -13,6 +13,7 @@ import SearchResource from './SearchResource';
 export default () => {
   const history = useHistory()
   const [resources, setResources] = useState([])
+  const [loading, setLoading] = useState(false)
   const [categorySelected, setCategorySelected] = useState("")
   const resourcesCollection = firebase.firestore().collection("resources")
 
@@ -34,10 +35,12 @@ export default () => {
 
   const _searchResourceByKeywords = async (keywords = []) => {
     try {
+      setLoading(false)
       const resourcesDoc = await resourcesCollection
         .where("keywords", "array-contains-any", keywords)
         .get();
       setResources(resourcesDoc.docs.map(resource => resource.data()))
+      setLoading(true)
     } catch (error) {
       console.log(error)
     }
@@ -45,10 +48,12 @@ export default () => {
 
   const _getListResourceByCategory = async (category) => {
     try {
+      setLoading(false)
       const resourcesDoc = await resourcesCollection
         .where("category", "==", category)
         .get();
       setResources(resourcesDoc.docs.map(resource => resource.data()))
+      setLoading(true)
     } catch (error) {
       console.log(error)
     }
@@ -97,9 +102,13 @@ export default () => {
             <SearchResource
               onSearch={_searchResourceByKeywords}
             />
-            <ListResources
-              dataSource={resources}
-            />
+            <Spin
+              spinning={loading}
+            >
+              <ListResources
+                dataSource={resources}
+              />
+            </Spin>
           </Space>
         </Col>
       </Row>

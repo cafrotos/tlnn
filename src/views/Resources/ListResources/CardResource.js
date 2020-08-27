@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Row, Typography } from 'antd';
 import CarouseResource from 'components/CarouselResource';
+import ModalResource from './ModalResource';
 
 export default ({
   data
@@ -9,15 +10,19 @@ export default ({
     return null
   }
   return (
-    <Card className="card_resource">
-      <CarouseResource
-        multimedias={data.multimedias}
-      />
-      <Row justify="center">
-        <Typography.Text>
-          {data.identify}
-        </Typography.Text>
-      </Row>
-    </Card>
+    <ModalResource
+      identity={data.identity}
+    >
+      <Card className="card_resource">
+        <CarouseResource
+          multimedias={data.multimedias}
+        />
+        <Row justify="center">
+          <Typography.Text>
+            {data.identity}
+          </Typography.Text>
+        </Row>
+      </Card>
+    </ModalResource>
   )
 }
