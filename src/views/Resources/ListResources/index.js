@@ -4,7 +4,8 @@ import CardResource from './CardResource';
 import _ from 'lodash'
 
 export default ({
-  dataSource
+  dataSource,
+  disabled
 }) => {
   const dataSourceColumns = dataSource instanceof Array ? _.chunk(dataSource, Math.ceil(dataSource.length / 4)) : [[], [], [], []]
   return (
@@ -17,6 +18,7 @@ export default ({
                 <CardResource
                   key={cellIndex}
                   data={cell}
+                  disabled={disabled}
                 />
               ))
             }

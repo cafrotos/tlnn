@@ -2,6 +2,7 @@ import React, { forwardRef, useImperativeHandle } from 'react';
 import { Form, Input, Upload, TreeSelect, Select } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import resourceStructures from 'configs/resourceStructures';
+import { v1 } from 'uuid'
 
 const formItemLayout = {
   labelCol: { span: 6 },
@@ -31,11 +32,37 @@ export default forwardRef(({
     });
   };
 
+  const convertToFileList = (source, type) => {
+    if (source instanceof Array) {
+      return source.map(item => ({
+        uid: v1(),
+        name: item.path && item.path.split("/").pop(),
+        status: 'done',
+        url: item.url,
+        path: item.path,
+        type
+      }))
+    }
+    return []
+  }
+
+  const _getMultimedias = (dataSource) => {
+    if (!dataSource || !dataSource.multimedias) {
+      return []
+    }
+    return [
+      ...convertToFileList(dataSource.multimedias.images, "image"),
+      ...convertToFileList(dataSource.multimedias.audios, "audio"),
+      ...convertToFileList(dataSource.multimedias.videos, "video")
+    ]
+  }
+
   return (
     <Form
       {...formItemLayout}
       initialValues={{
-        ...initialValues
+        ...initialValues,
+        multimedias: _getMultimedias(initialValues)
       }}
       form={form}
       className={className}
@@ -80,6 +107,20 @@ export default forwardRef(({
         <Input />
       </Form.Item>
       <Form.Item
+        name="keywords"
+        label="Keywords"
+        rules={[{
+          required: true
+        }]}
+      >
+        <Select
+          mode="tags"
+          dropdownStyle={{
+            display: "none"
+          }}
+        />
+      </Form.Item>
+      <Form.Item
         name="multimedias"
         label="Multimedias"
         valuePropName="fileList"
@@ -89,7 +130,7 @@ export default forwardRef(({
         }]}
       >
         <Upload.Dragger
-        
+
           listType="picture-card"
           accept={"image/*,audio/*,video/*"}
           name="multimedias"
@@ -109,20 +150,6 @@ export default forwardRef(({
             Upload images, videos, audios
           </p>
         </Upload.Dragger>
-      </Form.Item>
-      <Form.Item
-        name="keywords"
-        label="Keywords"
-        rules={[{
-          required: true
-        }]}
-      >
-        <Select
-          mode="tags"
-          dropdownStyle={{
-            display: "none"
-          }}
-        />
       </Form.Item>
     </Form>
   )

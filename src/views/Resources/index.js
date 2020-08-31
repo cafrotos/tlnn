@@ -27,7 +27,10 @@ export default () => {
     try {
       const resourcesDoc = await resourcesCollection
         .get();
-      setResources(resourcesDoc.docs.map(resource => resource.data()))
+      setResources(resourcesDoc.docs.map(resource => ({
+        id: resource.id,
+        ...resource.data()
+      })))
     } catch (error) {
       console.log(error)
     }
@@ -35,12 +38,15 @@ export default () => {
 
   const _searchResourceByKeywords = async (keywords = []) => {
     try {
-      setLoading(false)
+      setLoading(true)
       const resourcesDoc = await resourcesCollection
         .where("keywords", "array-contains-any", keywords)
         .get();
-      setResources(resourcesDoc.docs.map(resource => resource.data()))
-      setLoading(true)
+      setResources(resourcesDoc.docs.map(resource => ({
+        id: resource.id,
+        ...resource.data()
+      })))
+      setLoading(false)
     } catch (error) {
       console.log(error)
     }
@@ -48,12 +54,15 @@ export default () => {
 
   const _getListResourceByCategory = async (category) => {
     try {
-      setLoading(false)
+      setLoading(true)
       const resourcesDoc = await resourcesCollection
         .where("category", "==", category)
         .get();
-      setResources(resourcesDoc.docs.map(resource => resource.data()))
-      setLoading(true)
+      setResources(resourcesDoc.docs.map(resource => ({
+        id: resource.id,
+        ...resource.data()
+      })))
+      setLoading(false)
     } catch (error) {
       console.log(error)
     }

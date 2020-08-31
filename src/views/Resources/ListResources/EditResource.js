@@ -1,14 +1,16 @@
-import React, { useRef, useState } from 'react';
-import { Row, Button, notification } from 'antd';
+import React, { useRef, useState, forwardRef, useImperativeHandle } from 'react';
+import { notification } from 'antd';
 import ResourceForm from 'components/ResourceForm';
-import Title from 'components/Title';
-import { createResource } from 'utils/firebase';
+import { updateResource } from 'utils/firebase';
 
-import './index.less'
-
-export default () => {
-  const [loading, setLoading] = useState(false)
+export default forwardRef(({
+  intialResource
+}, ref) => {
   const resourceRef = useRef();
+
+  useImperativeHandle(ref, () => ({
+    submit: _onSubmit
+  }))
 
   const _onSubmit = async () => {
     if (!resourceRef.current || !resourceRef.current.form) {
@@ -21,11 +23,10 @@ export default () => {
       return
     }
 
-    setLoading(true)
     const resource = resourceRef.current.form.getFieldsValue();
 
     try {
-      await createResource(resource)
+      await updateResource(resource, intialResource.id)
       notification.success({
         message: "Success"
       })
@@ -35,29 +36,15 @@ export default () => {
         description: error.message
       })
     }
-
-    setLoading(false)
   }
 
   return (
     <div className="create_resource">
-      <Title
-        backable={true}
-        title="Create Resource"
-      />
       <ResourceForm
         ref={resourceRef}
         className="resource_form"
+        initialValues={intialResource}
       />
-      <Row justify="center">
-        <Button
-          type="primary"
-          loading={loading}
-          onClick={_onSubmit}
-        >
-          Submit
-        </Button>
-      </Row>
     </div>
   )
-}
+})
